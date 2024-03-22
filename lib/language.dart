@@ -1,26 +1,36 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do_app/my_provider/provider.dart';
+import 'package:to_do_app/themeData.dart';
 
 class LanguageSheet extends StatelessWidget {
   const LanguageSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var prov=Provider.of<MyProvider>(context);
     return Column(
        children: [
          Padding(
            padding: const EdgeInsets.all(32.0),
            child: Row(
              children: [
-               Text("English",style: GoogleFonts.inter(
-                   fontSize: 22,
-                   fontWeight: FontWeight.w400,
-                   color: Color(0xff5D9CEC)
-               )),
+               InkWell(
+                 onTap: () {
+                   prov.changeLang("en");
+                 },
+                 child: Text("${AppLocalizations.of(context)!.en}",style: GoogleFonts.inter(
+                     fontSize: 22,
+                     fontWeight: FontWeight.w400,
+                     color: MyThemeData.primaryColor
+                 )),
+               ),
                Spacer(),
 
-               Icon(Icons.check,size: 30,color:Color(0xff5D9CEC) ,)
+                Icon(Icons.check ,color: prov.langCode=="en"? MyThemeData.primaryColor : Colors.transparent ,)
              ],
            ),
          ),
@@ -28,13 +38,15 @@ class LanguageSheet extends StatelessWidget {
            padding: const EdgeInsets.all(32.0),
            child: Row(
              children: [
-               Text("Arabic",style: GoogleFonts.inter(
-                   fontSize: 22,
-                   fontWeight: FontWeight.w400,
-                   color: Colors.black
-               )),
+               InkWell(
+                   onTap: () {
+                     prov.changeLang("ar");
+                   },
+                   child: Text("${AppLocalizations.of(context)!.ar}",style: MyThemeData.light.textTheme.bodySmall)),
                Spacer(),
-               Icon(Icons.check,size: 30,)
+               Icon(Icons.check ,color: prov.langCode=="ar"? MyThemeData.primaryColor : Colors.transparent ,)
+
+
              ],
            ),
          ),

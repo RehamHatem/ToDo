@@ -6,5 +6,16 @@
   "ar": "Arabic",
   "mode": "Mood",
   "light": "Light",
-  "dark": "Dark"
+  "dark": "Dark",
+  "tasktitle": "Task Title",
+  "taskdesc": "Task Description",
+  "addTask": "Add New Task",
+  "title": "title",
+  "description": "description",
+  "selectdate": "Select Date",
+  "add": "Add Task",
+  "delete": "Delete",
+  "edit": "Edit",
+  "terror": "pleas enter task title",
+  "derror": "pleas enter task describtion"
 }

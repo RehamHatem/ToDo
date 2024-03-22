@@ -1,12 +1,20 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do_app/themeData.dart';
+
+import '../my_provider/provider.dart';
 
 class ListItem extends StatelessWidget {
   const ListItem({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<MyProvider>(context);
+
     return Slidable(
       startActionPane: ActionPane(motion: DrawerMotion(), children: [
         SlidableAction(
@@ -14,7 +22,7 @@ class ListItem extends StatelessWidget {
 
           },
           backgroundColor: Colors.red,
-          label: "Delete",
+          label: "${AppLocalizations.of(context)!.delete}",
           spacing: 20,
           icon: Icons.delete,
           borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10)),
@@ -23,7 +31,7 @@ class ListItem extends StatelessWidget {
 
         },
         backgroundColor: Colors.blue,
-        label: "Edit",
+        label:"${AppLocalizations.of(context)!.edit}",
           spacing: 20,
 
           icon: Icons.edit,)
@@ -31,7 +39,7 @@ class ListItem extends StatelessWidget {
       ]),
       child: Container(
         height: 100,
-        decoration: BoxDecoration(color: Colors.white,
+        decoration: BoxDecoration(color: pro.mood==ThemeMode.light? Colors.white:Color(0xff141922),
         ),
         child: Row(
           children: [
@@ -47,27 +55,20 @@ class ListItem extends StatelessWidget {
             Expanded(
               child: ListTile(
                 title: Text(
-                  "Task Tiltle",
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  "${AppLocalizations.of(context)!.tasktitle}",
+                  style: pro.mood==ThemeMode.light? MyThemeData.light.textTheme.bodyMedium:MyThemeData.dark.textTheme.bodyMedium
                 ),
                 subtitle: Text(
-                  "Task Describtion",
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
-                  ),
+                  "${AppLocalizations.of(context)!.taskdesc}",
+                    style: pro.mood==ThemeMode.light? MyThemeData.light.textTheme.bodySmall:MyThemeData.dark.textTheme.bodySmall
                 ),
                 trailing: Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
                     decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: MyThemeData.primaryColor,
                         borderRadius: BorderRadius.circular(10)),
                     child: Icon(
                       Icons.check,
-                      size: 30,
                       color: Colors.white,
                     )),
               ),

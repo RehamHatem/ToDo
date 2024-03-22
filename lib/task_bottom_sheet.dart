@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:to_do_app/themeData.dart';
 
 class TaskModelSheet extends StatefulWidget {
    TaskModelSheet({super.key});
@@ -21,21 +23,19 @@ DateTime selectedDate=DateTime.now();
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Add New Task",
-              style: GoogleFonts.poppins(
-                  color: Colors.black, fontWeight: FontWeight.w600, fontSize: 30),
-            ),
+              "${AppLocalizations.of(context)!.addTask}",
+              style: MyThemeData.light.textTheme.bodyMedium,),
             SizedBox(
               height: 16,
             ),
             TextFormField(
           validator: (value) {
         if(value==null || value.isEmpty){
-          return "pleas enter task title";
+          return "${AppLocalizations.of(context)!.terror}";
         }},
               decoration: InputDecoration(
                 label: Text(
-                  "title",
+                  "${AppLocalizations.of(context)!.title}",
                   style: TextStyle(fontSize: 20),
                 ),
                 errorBorder: OutlineInputBorder(
@@ -43,10 +43,10 @@ DateTime selectedDate=DateTime.now();
                     borderSide: BorderSide(color: Colors.red)),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.blue)),
+                    borderSide: BorderSide(color:  MyThemeData.primaryColor)),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.blue)),
+                    borderSide: BorderSide(color:  MyThemeData.primaryColor)),
               ),
             ),
             SizedBox(
@@ -55,12 +55,12 @@ DateTime selectedDate=DateTime.now();
             TextFormField(
               validator: (value) {
                 if(value==null || value.isEmpty){
-                  return "pleas enter task describtion";
+                  return "${AppLocalizations.of(context)!.derror}";
                 }
               },
               decoration: InputDecoration(
                 label: Text(
-                  "decribtion",
+                  "${AppLocalizations.of(context)!.description}",
                   style: TextStyle(fontSize: 20),
                 ),
                 errorBorder: OutlineInputBorder(
@@ -68,10 +68,10 @@ DateTime selectedDate=DateTime.now();
                     borderSide: BorderSide(color: Colors.red)),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.blue)),
+                    borderSide: BorderSide(color:  MyThemeData.primaryColor)),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.blue)),
+                    borderSide: BorderSide(color:  MyThemeData.primaryColor)),
               ),
             ),
             SizedBox(
@@ -80,7 +80,7 @@ DateTime selectedDate=DateTime.now();
             Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Select Date",
+                  "${AppLocalizations.of(context)!.selectdate}",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
                 )),
             SizedBox(
@@ -108,7 +108,7 @@ DateTime selectedDate=DateTime.now();
                     }
                   },
                   child: Text(
-                    "Add Task",
+                    "${AppLocalizations.of(context)!.add}",
                     style: GoogleFonts.poppins(
                         fontSize: 20, fontWeight: FontWeight.w400),
                   ),

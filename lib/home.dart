@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/taps/list.dart';
 import 'package:to_do_app/task_bottom_sheet.dart';
-// import 'package:to_do_app/taps/setting.dart';
+ import 'package:to_do_app/taps/setting.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:to_do_app/themeData.dart';
 
+import 'my_provider/provider.dart';
 class Home extends StatefulWidget {
   static const String routeName = "home";
 
@@ -18,20 +22,17 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<MyProvider>(context);
+
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xffDFECDB),
+        color: pro.mood==ThemeMode.light? MyThemeData.bgColor:MyThemeData.bgDarkColor,
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        extendBody: true,
         appBar: AppBar(
-          backgroundColor: Color(0xff5D9CEC),
-          elevation: 0,
-          title: Text("To Do List",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w700,
-                fontSize: 22,
-              )),
+          title: Text("${AppLocalizations.of(context)!.appName}",
+          ),
         ),
         body: tabs[index],
         floatingActionButton: FloatingActionButton(
@@ -47,41 +48,31 @@ class _HomeState extends State<Home> {
                 },
               );
             },
-            child: Icon(Icons.add, size: 30),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-                side: BorderSide(color: Colors.white, width: 4)),
-            elevation: 0),
+            child: Icon(Icons.add,),
+
+            ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
           notchMargin: 10,
-          shape: CircularNotchedRectangle(),
-          padding: EdgeInsets.zero,
-          color: Colors.white,
+
           child: BottomNavigationBar(
             currentIndex: index,
             onTap: (value) {
               index = value;
               setState(() {});
             },
-            backgroundColor: Colors.transparent,
-            type: BottomNavigationBarType.fixed,
-            elevation: 0,
-            unselectedItemColor: Colors.grey,
-            selectedItemColor: Color(0xff5D9CEC),
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
+
             items: [
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage("assets/images/icon_list.png"),
-                      size: 30),
+                  ),
                   label: ""),
               BottomNavigationBarItem(
                   icon: ImageIcon(
                       AssetImage(
                         "assets/images/icon_settings.png",
                       ),
-                      size: 30),
+                     ),
                   label: ""),
             ],
           ),
@@ -92,6 +83,6 @@ class _HomeState extends State<Home> {
 
   List<Widget> tabs = [
     ToDoList(),
-    // Settings(),
+    Settings(),
   ];
 }

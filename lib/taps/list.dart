@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do_app/themeData.dart';
 
+import '../my_provider/provider.dart';
 import 'list_item.dart';
 
 class ToDoList extends StatelessWidget {
@@ -8,6 +11,7 @@ class ToDoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(children: [
       Container(
         height: 120,
@@ -17,15 +21,16 @@ class ToDoList extends StatelessWidget {
             Container(
               height: 70,
               decoration: BoxDecoration(
-                color: Color(0xff5D9CEC),
+                color: MyThemeData.primaryColor,
               ),
             ),
             DatePicker(
               height: 100,
                 DateTime.now(),
                 initialSelectedDate: DateTime.now(),
-                selectionColor: Color(0xff5D9CEC),
-                selectedTextColor: Colors.white, onDateChange: (date) {
+                selectionColor: MyThemeData.primaryColor,
+                selectedTextColor: Colors.white,
+                onDateChange: (date) {
               // New date selected
               // setState(() {
               //   _selectedValue = date;

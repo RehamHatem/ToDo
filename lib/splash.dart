@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do_app/themeData.dart';
 
 import 'home.dart';
+import 'my_provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName="splash";
@@ -23,8 +26,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<MyProvider>(context);
+
     return Scaffold(
-      backgroundColor: Color(0xffDFECDB),
+      backgroundColor: pro.mood == ThemeMode.light?MyThemeData.bgColor:MyThemeData.bgDarkColor,
       body: Stack(
        alignment: Alignment.bottomCenter,
         children: [
@@ -35,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Text("supervised by Mohamed Hamouda",style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 14,
-              color: Color(0xff3598DB)
+              color:  MyThemeData.primaryColor
             )),
           ),
 
