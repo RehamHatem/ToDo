@@ -4,12 +4,16 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_app/fire_base.dart';
+import 'package:to_do_app/model.dart';
+import 'package:to_do_app/taps/update.dart';
 import 'package:to_do_app/themeData.dart';
 
 import '../my_provider/provider.dart';
 
 class ListItem extends StatelessWidget {
-  const ListItem({super.key});
+  TaskModel model;
+  ListItem({required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +23,7 @@ class ListItem extends StatelessWidget {
       startActionPane: ActionPane(motion: DrawerMotion(), children: [
         SlidableAction(
           onPressed: (context) {
+            FirebaseFunctions.daleteTask(model.id);
 
           },
           backgroundColor: Colors.red,
@@ -28,6 +33,7 @@ class ListItem extends StatelessWidget {
           borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10)),
         ),
         SlidableAction(onPressed: (context) {
+          Navigator.pushNamed(context, UpdateTask.routeName,arguments: model);
 
         },
         backgroundColor: Colors.blue,
@@ -55,11 +61,13 @@ class ListItem extends StatelessWidget {
             Expanded(
               child: ListTile(
                 title: Text(
-                  "${AppLocalizations.of(context)!.tasktitle}",
+                  // "${AppLocalizations.of(context)!.tasktitle}",
+                  model.title,
                   style: pro.mood==ThemeMode.light? MyThemeData.light.textTheme.bodyMedium:MyThemeData.dark.textTheme.bodyMedium
                 ),
                 subtitle: Text(
-                  "${AppLocalizations.of(context)!.taskdesc}",
+                  // "${AppLocalizations.of(context)!.taskdesc}",
+                  model.description,
                     style: pro.mood==ThemeMode.light? MyThemeData.light.textTheme.bodySmall:MyThemeData.dark.textTheme.bodySmall
                 ),
                 trailing: Container(

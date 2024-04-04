@@ -17,5 +17,8 @@
   "delete": "Delete",
   "edit": "Edit",
   "terror": "pleas enter task title",
-  "derror": "pleas enter task describtion"
+  "derror": "pleas enter task describtion",
+  "edittask": "Edit Task",
+  "update": "Update",
+  "save": "Save Changes"
 }

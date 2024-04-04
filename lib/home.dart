@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/taps/list.dart';
+import 'package:to_do_app/taps/update.dart';
 import 'package:to_do_app/task_bottom_sheet.dart';
  import 'package:to_do_app/taps/setting.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -84,5 +85,6 @@ class _HomeState extends State<Home> {
   List<Widget> tabs = [
     ToDoList(),
     Settings(),
+    UpdateTask()
   ];
 }

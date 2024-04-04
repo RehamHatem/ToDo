@@ -1,7 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do_app/fire_base.dart';
+import 'package:to_do_app/model.dart';
 import 'package:to_do_app/themeData.dart';
+
+import 'my_provider/provider.dart';
 
 class TaskModelSheet extends StatefulWidget {
    TaskModelSheet({super.key});
@@ -13,8 +19,12 @@ class TaskModelSheet extends StatefulWidget {
 class _TaskModelSheetState extends State<TaskModelSheet> {
 var formKey=GlobalKey<FormState>();
 DateTime selectedDate=DateTime.now();
+TextEditingController descriptionController=TextEditingController();
+TextEditingController titleController=TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var prov = Provider.of<MyProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
@@ -24,7 +34,7 @@ DateTime selectedDate=DateTime.now();
           children: [
             Text(
               "${AppLocalizations.of(context)!.addTask}",
-              style: MyThemeData.light.textTheme.bodyMedium,),
+              style: prov.mood==ThemeMode.light?MyThemeData.light.textTheme.bodyMedium:MyThemeData.dark.textTheme.bodyMedium,),
             SizedBox(
               height: 16,
             ),
@@ -33,6 +43,7 @@ DateTime selectedDate=DateTime.now();
         if(value==null || value.isEmpty){
           return "${AppLocalizations.of(context)!.terror}";
         }},
+              controller: titleController,
               decoration: InputDecoration(
                 label: Text(
                   "${AppLocalizations.of(context)!.title}",
@@ -58,6 +69,7 @@ DateTime selectedDate=DateTime.now();
                   return "${AppLocalizations.of(context)!.derror}";
                 }
               },
+              controller: descriptionController,
               decoration: InputDecoration(
                 label: Text(
                   "${AppLocalizations.of(context)!.description}",
@@ -104,7 +116,10 @@ DateTime selectedDate=DateTime.now();
                 child: ElevatedButton(
                   onPressed: () {
                     if(formKey.currentState!.validate()){
-                      print("========");
+                      TaskModel task=TaskModel(description: descriptionController.text, title: titleController.text, date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
+                      FirebaseFunctions.addTask(task).then((value) {
+                        Navigator.pop(context);
+                      });
                     }
                   },
                   child: Text(

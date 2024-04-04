@@ -1,14 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/splash.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:to_do_app/taps/update.dart';
 import 'package:to_do_app/themeData.dart';
 import 'package:provider/provider.dart';
 
+import 'firebase_options.dart';
 import 'home.dart';
 import 'my_provider/provider.dart';
 
-void main (){
+void main () async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(ChangeNotifierProvider<MyProvider>(
       create: (context) => MyProvider(),
       child: MyApp ()));
@@ -40,6 +47,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName:(context) => SplashScreen(),
         Home.routeName:(context) => Home(),
+        UpdateTask.routeName:(context) => UpdateTask(),
       },
 
 
