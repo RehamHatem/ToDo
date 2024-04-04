@@ -15,7 +15,6 @@ class TaskModel {
   TaskModel.fromJson(Map<String, dynamic> json)
     :this
     (
-
     description: json['description'],
     title: json['title'],
     date: json['date'],

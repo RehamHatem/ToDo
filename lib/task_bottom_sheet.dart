@@ -113,6 +113,10 @@ TextEditingController titleController=TextEditingController();
             ),
             Container(
                 width: double.infinity,
+                decoration: BoxDecoration(
+                    color: MyThemeData.primaryColor,
+                    borderRadius: BorderRadius.circular(12)
+                ),
                 child: ElevatedButton(
                   onPressed: () {
                     if(formKey.currentState!.validate()){
@@ -127,9 +131,11 @@ TextEditingController titleController=TextEditingController();
                     style: GoogleFonts.poppins(
                         fontSize: 20, fontWeight: FontWeight.w400),
                   ),
+
                   style: ButtonStyle(
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)))),
+                    backgroundColor: MaterialStatePropertyAll(
+                        Colors.transparent),
+                    elevation: MaterialStatePropertyAll(0),),
                 ))
           ],
         ),

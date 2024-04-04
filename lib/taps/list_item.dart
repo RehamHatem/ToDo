@@ -11,10 +11,15 @@ import 'package:to_do_app/themeData.dart';
 
 import '../my_provider/provider.dart';
 
-class ListItem extends StatelessWidget {
+class ListItem extends StatefulWidget {
   TaskModel model;
   ListItem({required this.model});
 
+  @override
+  State<ListItem> createState() => _ListItemState();
+}
+
+class _ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
     var pro=Provider.of<MyProvider>(context);
@@ -23,7 +28,7 @@ class ListItem extends StatelessWidget {
       startActionPane: ActionPane(motion: DrawerMotion(), children: [
         SlidableAction(
           onPressed: (context) {
-            FirebaseFunctions.daleteTask(model.id);
+            FirebaseFunctions.daleteTask(widget.model.id);
 
           },
           backgroundColor: Colors.red,
@@ -33,7 +38,7 @@ class ListItem extends StatelessWidget {
           borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10)),
         ),
         SlidableAction(onPressed: (context) {
-          Navigator.pushNamed(context, UpdateTask.routeName,arguments: model);
+          Navigator.pushNamed(context, UpdateTask.routeName,arguments: widget.model);
 
         },
         backgroundColor: Colors.blue,
@@ -62,23 +67,32 @@ class ListItem extends StatelessWidget {
               child: ListTile(
                 title: Text(
                   // "${AppLocalizations.of(context)!.tasktitle}",
-                  model.title,
+                  widget.model.title,
                   style: pro.mood==ThemeMode.light? MyThemeData.light.textTheme.bodyMedium:MyThemeData.dark.textTheme.bodyMedium
                 ),
                 subtitle: Text(
                   // "${AppLocalizations.of(context)!.taskdesc}",
-                  model.description,
+                  widget.model.description,
                     style: pro.mood==ThemeMode.light? MyThemeData.light.textTheme.bodySmall:MyThemeData.dark.textTheme.bodySmall
                 ),
-                trailing: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                    decoration: BoxDecoration(
-                        color: MyThemeData.primaryColor,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Icon(
-                      Icons.check,
-                      color: Colors.white,
-                    )),
+                trailing: InkWell(
+                  onTap: (){
+                    setState(() {
+                      widget.model.isDone = !widget.model.isDone;
+                    });
+
+
+                  },
+                  child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                      decoration: BoxDecoration(
+                          color: widget.model.isDone==false? MyThemeData.primaryColor :Color(0xff61E757),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.white,
+                      )),
+                ),
               ),
             ),
           ],
