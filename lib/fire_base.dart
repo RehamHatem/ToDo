@@ -112,4 +112,8 @@ class FirebaseFunctions {
     await getUsersCollection().doc(id).get();
     return documentSnapshot.data();
   }
+
+  static void logOut() async{
+    await FirebaseAuth.instance.signOut();
+  }
 }

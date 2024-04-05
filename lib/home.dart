@@ -9,6 +9,8 @@ import 'package:to_do_app/task_bottom_sheet.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:to_do_app/themeData.dart';
 
+import 'auth/Authentication.dart';
+import 'fire_base.dart';
 import 'my_provider/provider.dart';
 class Home extends StatefulWidget {
   static const String routeName = "home";
@@ -35,8 +37,16 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         extendBody: true,
         appBar: AppBar(
-          title: Text("${AppLocalizations.of(context)!.appName}",
-          ),
+          title: Text("${AppLocalizations.of(context)!.appName}",),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  FirebaseFunctions.logOut();
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, AuthScreen.routeName, (route) => false);
+                },
+                icon: Icon(Icons.logout))
+          ],
         ),
         body: tabs[index],
         floatingActionButton: FloatingActionButton(
