@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -120,10 +121,12 @@ TextEditingController titleController=TextEditingController();
                 child: ElevatedButton(
                   onPressed: () {
                     if(formKey.currentState!.validate()){
-                      TaskModel task=TaskModel(description: descriptionController.text, title: titleController.text, date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
-                      FirebaseFunctions.addTask(task).then((value) {
+                      TaskModel task=TaskModel(
+                        userId: FirebaseAuth.instance.currentUser!.uid,
+                          description: descriptionController.text, title: titleController.text, date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
+                      FirebaseFunctions.addTask(task);
                         Navigator.pop(context);
-                      });
+
                     }
                   },
                   child: Text(

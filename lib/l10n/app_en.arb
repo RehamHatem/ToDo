@@ -20,5 +20,13 @@
   "derror": "pleas enter task describtion",
   "edittask": "Edit Task",
   "update": "Update",
-  "save": "Save Changes"
+  "save": "Save Changes",
+  "auth": "Authentication",
+  "login": "LogIn",
+  "signin": "SignIn",
+  "email": "Email",
+  "pass": "Password",
+  "username": "Name",
+  "userphone": "Phone"
+
 }

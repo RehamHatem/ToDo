@@ -38,7 +38,9 @@ class _ListItemState extends State<ListItem> {
           borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10)),
         ),
         SlidableAction(onPressed: (context) {
-          Navigator.pushNamed(context, UpdateTask.routeName,arguments: widget.model);
+          if(widget.model.isDone==false){
+            Navigator.pushNamed(context, UpdateTask.routeName,arguments: widget.model);
+          }
 
         },
         backgroundColor: Colors.blue,

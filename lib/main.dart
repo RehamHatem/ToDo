@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_app/auth/Authentication.dart';
 import 'package:to_do_app/splash.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -10,15 +12,21 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'home.dart';
 import 'my_provider/provider.dart';
+import 'my_provider/user_provider.dart';
 
-void main () async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ChangeNotifierProvider<MyProvider>(
-      create: (context) => MyProvider(),
-      child: MyApp ()));
+  // FirebaseFirestore.instance.disableNetwork();
+  runApp(
+      MultiProvider(providers: [ChangeNotifierProvider<MyProvider>(create: (context) => MyProvider()),
+  ChangeNotifierProvider<userprovider>(create: (context) => userprovider()),],
+  child: MyApp(),
+  ),
+
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +34,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider=Provider.of<MyProvider>(context);
+    var provider = Provider.of<MyProvider>(context);
+    var prov = Provider.of<userprovider>(context);
+
     return MaterialApp(
       localizationsDelegates: [
         AppLocalizations.delegate, // Add this line
@@ -45,9 +55,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: SplashScreen.routeName,
       routes: {
-        SplashScreen.routeName:(context) => SplashScreen(),
-        Home.routeName:(context) => Home(),
-        UpdateTask.routeName:(context) => UpdateTask(),
+        SplashScreen.routeName: (context) => SplashScreen(),
+        Home.routeName: (context) => Home(),
+        UpdateTask.routeName: (context) => UpdateTask(),
+        AuthScreen.routeName: (context) => AuthScreen(),
       },
 
 
