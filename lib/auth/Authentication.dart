@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/auth/signin.dart';
 import 'package:to_do_app/themeData.dart';
-
 import '../my_provider/provider.dart';
 import '../my_provider/user_provider.dart';
 import 'login.dart';
@@ -42,6 +41,7 @@ class AuthScreen extends StatelessWidget {
               SignIn()
             ],
           ),
+
         ),
       ),
     );

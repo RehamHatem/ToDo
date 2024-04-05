@@ -62,18 +62,18 @@ class Settings extends StatelessWidget {
                     padding: EdgeInsets.only(left: 16),
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: prov.mood==ThemeMode.light? Colors.white :MyThemeData.primaryDarkColor,
                         border: Border.all(
                             color: MyThemeData.primaryColor, width: 2)),
                     child: Text(
-                      "${AppLocalizations.of(context)!.en}",
+                      "${prov.langCode=="en"? AppLocalizations.of(context)!.en:AppLocalizations.of(context)!.ar}",
                       style:  MyThemeData.light.textTheme.bodySmall
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 30),
-              Text("${AppLocalizations.of(context)!.mode}",
+              Text(" ${  AppLocalizations.of(context)!.mode}",
                   style: prov.mood == ThemeMode.light
                       ? MyThemeData.light.textTheme.bodyMedium
                       : MyThemeData.dark.textTheme.bodyMedium,),
@@ -95,10 +95,10 @@ class Settings extends StatelessWidget {
                     padding: EdgeInsets.only(left: 16),
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: prov.mood==ThemeMode.light?Colors.white:MyThemeData.primaryDarkColor,
                         border: Border.all(
                             color: MyThemeData.primaryColor, width: 2)),
-                    child: Text("${AppLocalizations.of(context)!.light}",
+                    child: Text("${prov.mood=="light"? AppLocalizations.of(context)!.light:AppLocalizations.of(context)!.dark}",
                         style: MyThemeData.light.textTheme.bodySmall),
                   ),
                 ),
